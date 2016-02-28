@@ -14,13 +14,16 @@ class ViewController: UIViewController, UIActionSheetDelegate, UICollectionViewD
     @IBOutlet var eyeImageView: UIImageView!
     @IBOutlet var hairImageView: UIImageView!
     @IBOutlet var facelineImageView: UIImageView!
+    /* 使わないものは消そう！！ */
     @IBOutlet var part1Bt: UIButton!
     @IBOutlet var part2Bt: UIButton!
     @IBOutlet var part3Bt: UIButton!
     @IBOutlet var part4Bt: UIButton!
+    /*ここまで*/
     @IBOutlet var myCollectionView : UICollectionView!
     
-    var number: Int = 0
+    //最初はeyeが選択されているということにして0→1に変更
+    var number: Int = 1
     
     var imageArray:[String] = []
     
@@ -34,13 +37,15 @@ class ViewController: UIViewController, UIActionSheetDelegate, UICollectionViewD
         self.view.addGestureRecognizer(longPressGesture)
         myCollectionView.delegate = self
         myCollectionView.dataSource = self
-        imageArray = ["eye1.png", "eye2.png","eye3.png","eye4.png"]
+        
+        /* 画像の名前が変わったので配列のimageArrayの中身も変えよう！ */
+        imageArray = ["eye1.png", "eye2.png","eye5.png","eye6.png", "eye7.png"]
     }
     func longPressGesture(sender: UILongPressGestureRecognizer){
         if sender.state == UIGestureRecognizerState.Began {
             let sheet: UIActionSheet = UIActionSheet()
             sheet.delegate = self
-            sheet.title = "画像を保存しますか？byながた"
+            sheet.title = "画像を保存しますか？byながた"//「byながた」消そう！笑
             sheet.addButtonWithTitle("Cancel")
             sheet.addButtonWithTitle("画像を保存")
             sheet.cancelButtonIndex = 0
@@ -56,14 +61,15 @@ class ViewController: UIViewController, UIActionSheetDelegate, UICollectionViewD
         
         switch number {
         case 1:
-            let imageName = "eye" + String(indexPath.row + 1) + ".png"
-            eyeImageView.image = UIImage(named: imageName)
+//消す            let imageName = "eye" + String(indexPath.row + 1) + ".png"
+            /* imageArrayがあるのでindexPath.row番目の配列の要素(画像の名前)を取ってくるようにしよう */
+            eyeImageView.image = UIImage(named: imageArray[indexPath.row])
         case 2:
-            let imageName = "nose" + String(indexPath.row + 1) + ".png"
-            noseImageView.image = UIImage(named: imageName)
+//消す            let imageName = "nose" + String(indexPath.row + 1) + ".png"
+            noseImageView.image = UIImage(named: imageArray[indexPath.row])
         case 3:
-            let imageName = "hair" + String(indexPath.row + 1) + ".png"
-            hairImageView.image = UIImage(named: imageName)
+//消す            let imageName = "hair" + String(indexPath.row + 1) + ".png"
+            hairImageView.image = UIImage(named: imageArray[indexPath.row])
         default:
             break
         }
@@ -99,11 +105,15 @@ class ViewController: UIViewController, UIActionSheetDelegate, UICollectionViewD
     
     @IBAction func tapEyeBt(){
         //ボタンの画像を切り替える
+        /* 消そう！！ */
 //        part1Bt.setBackgroundImage(UIImage(named: "eye1.png"), forState: UIControlState.Normal)
 //        part2Bt.setBackgroundImage(UIImage(named: "eye2.png"), forState: UIControlState.Normal)
 //        part3Bt.setBackgroundImage(UIImage(named: "eye3.png"), forState: UIControlState.Normal)
 //        part4Bt.setBackgroundImage(UIImage(named: "eye4.png"), forState: UIControlState.Normal)
-        imageArray = ["eye1.png", "eye2.png","eye3.png","eye4.png"]
+        /* ここまで！ */
+        
+        /* 配列の中身を目の画像の名前に合わせた */
+        imageArray = ["eye1.png", "eye2.png","eye5.png","eye6.png","eye7.png"]
         myCollectionView.reloadData()
 
         number = 1
@@ -111,22 +121,32 @@ class ViewController: UIViewController, UIActionSheetDelegate, UICollectionViewD
     }
     @IBAction func tapNoseBt(){
         //ボタンの画像を切り替える
+        /* 消そう */
 //        part1Bt.setBackgroundImage(UIImage(named: "nose1.png"), forState: UIControlState.Normal)
 //        part2Bt.setBackgroundImage(UIImage(named: "nose2.png"), forState: UIControlState.Normal)
 //        part3Bt.setBackgroundImage(UIImage(named: "nose3.png"), forState: UIControlState.Normal)
 //        part4Bt.setBackgroundImage(UIImage(named: "nose4.png"), forState: UIControlState.Normal)
+        /* ここまで */
+        
+        //FIXME: 問題1 配列の中身を鼻の画像の名前に合わせよう！
         imageArray = ["nose1.png", "nose2.png","nose3.png","nose4.png"]
         myCollectionView.reloadData()
 
         number = 2
         
     }
+    
+    //FIXME: 問題2 ボタンの名前を変えよう！HairをMouthにするなど
     @IBAction func tapHairBt(){
         //ボタンの画像を切り替える
+        /* 消そう */
 //        part1Bt.setBackgroundImage(UIImage(named: "hair1.png"), forState: UIControlState.Normal)
 //        part2Bt.setBackgroundImage(UIImage(named: "hair2.png"), forState: UIControlState.Normal)
 //        part3Bt.setBackgroundImage(UIImage(named: "hair3.png"), forState: UIControlState.Normal)
 //        part4Bt.setBackgroundImage(UIImage(named: "hair4.png"), forState: UIControlState.Normal)
+        /* ここまで */
+        
+        //FIXME: 問題3 配列の中身を口の画像の名前に合わせよう(髪の画像は今無いので)
         imageArray = ["hair1.png", "hair2.png","hair3.png","hair4.png"]
         myCollectionView.reloadData()
 
@@ -134,6 +154,10 @@ class ViewController: UIViewController, UIActionSheetDelegate, UICollectionViewD
         
     }
     
+    //FIXME: 問題4 eyebrowsのボタンも追加しよう！
+    
+    
+/* いらないものは消そう！*/
     @IBAction func tapPart1Bt(sender: UIButton){
         
         
@@ -150,9 +174,8 @@ class ViewController: UIViewController, UIActionSheetDelegate, UICollectionViewD
         default:
             break
         }
-        
-        
     }
+/* ここまで */
     
     func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
         if buttonIndex == 1 {
@@ -162,7 +185,7 @@ class ViewController: UIViewController, UIActionSheetDelegate, UICollectionViewD
                 let image = item?.image
                 image!.drawInRect(item!.frame)
             }
-            var faceImage = UIGraphicsGetImageFromCurrentImageContext()
+            let faceImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
             
             UIImageWriteToSavedPhotosAlbum(faceImage, nil, nil, nil)
@@ -179,11 +202,13 @@ class ViewController: UIViewController, UIActionSheetDelegate, UICollectionViewD
             let image = item?.image
             image!.drawInRect(item!.frame)
         }
-        var faceImage = UIGraphicsGetImageFromCurrentImageContext()
+        let faceImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
         UIImageWriteToSavedPhotosAlbum(faceImage, nil, nil, nil)
     }
+    
+    /* いらないものは消そう！*/
     //    @IBAction func tapPart2Bt(){
     //        switch number {
     //        case 1:
@@ -197,7 +222,7 @@ class ViewController: UIViewController, UIActionSheetDelegate, UICollectionViewD
     //        }
     
     //    }
-    
+    /* ここまで */
     
     
     
